@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "parkson";
+  src: url("../assets/fonts/parkson/ParksonPERSONALUSE-DemiBold.otf");
+}
