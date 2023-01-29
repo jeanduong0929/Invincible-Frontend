@@ -1,6 +1,6 @@
 import { FormEvent, useState, useContext } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "../models/Auth";
 import INV_API from "../utils/AxiosConfig";
 import { SetAuthContext } from "../contexts/AuthProvider";
@@ -82,11 +82,17 @@ const Login = () => {
         />
 
         <button
-          className="bg-slate-700 font-mono text-white | px-5 py-2 | rounded-md shadow-xl | ease-out duration-300 hover:scale-110"
+          className="bg-cyan-900 font-mono text-white | px-5 py-2 | rounded-md shadow-xl | ease-out duration-300 hover:scale-110"
           type="submit"
         >
           Log in
         </button>
+        <Link
+          to="/register"
+          className="font-mono text-blue-500 underline underline-offset-4"
+        >
+          Create an account
+        </Link>
       </form>
     </div>
   );
