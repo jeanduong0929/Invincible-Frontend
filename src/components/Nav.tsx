@@ -85,18 +85,30 @@ const Nav = () => {
                 />
               </svg>
               <ul className="absolute flex items-center px-32 py-4 w-full -translate-x-96 translate-y-16 | text-black | gap-5 | shadow-xl">
-                <li className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500">
+                <Link
+                  className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500"
+                  to="/shop/all"
+                >
                   Shop all
-                </li>
-                <li className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500">
+                </Link>
+                <Link
+                  className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500"
+                  to="/shop/top"
+                >
                   Tops
-                </li>
-                <li className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500">
+                </Link>
+                <Link
+                  className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500"
+                  to="/shop/pant"
+                >
                   Pants
-                </li>
-                <li className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500">
+                </Link>
+                <Link
+                  className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500"
+                  to="/shop/accessory"
+                >
                   Accessories
-                </li>
+                </Link>
               </ul>
             </div>
           ) : (
