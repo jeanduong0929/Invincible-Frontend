@@ -59,7 +59,8 @@ const Login = () => {
     });
 
   return (
-    <div className="flex flex-col items-center | mt-40">
+    /* Main */
+    <div className="flex flex-col items-center | mt-40 mb-40">
       <form
         className="flex flex-col items-center | gap-10 p-10 | shadow-xl rounded-md"
         onSubmit={(e) => submit(e)}
@@ -89,7 +90,7 @@ const Login = () => {
         </button>
         <Link
           to="/register"
-          className="font-mono text-blue-500 underline underline-offset-4"
+          className="font-mono text-blue-500 | underline underline-offset-4 | ease-out duration-300 hover:scale-110"
         >
           Create an account
         </Link>

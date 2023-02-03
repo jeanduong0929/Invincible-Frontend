@@ -114,7 +114,8 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center | mt-40">
+    /* Main */
+    <div className="flex flex-col items-center | mt-40 mb-40">
       <form
         className="flex flex-col items-center | p-10 gap-10 | rounded-md shadow-xl"
         onSubmit={(e) => submit(e)}
@@ -181,7 +182,7 @@ const Register = () => {
 
         <Link
           to="/login"
-          className="text-blue-500 font-mono underline underline-offset-4"
+          className="text-blue-500 font-mono | underline underline-offset-4 | ease-out duration-300 hover:scale-110"
         >
           Already have an account?
         </Link>

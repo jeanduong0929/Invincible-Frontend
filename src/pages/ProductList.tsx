@@ -5,40 +5,39 @@ import INV_API from "../utils/AxiosConfig";
 import Loading from "./Loading";
 
 const ProductList = () => {
-  const { product_path } = useParams();
+  const { category } = useParams();
   const [products, setProducts] = useState<Product[] | null>(null);
 
   useEffect(() => {
-    if (product_path === "all") {
+    if (category === "all") {
       getAllProducts();
     } else {
-      setProducts(null);
+      console.log(category);
+      getProductByCategory();
     }
-  }, [product_path]);
+  }, [category]);
 
   const getAllProducts = async () => {
     await INV_API.get("/product")
       .then((r) => {
         setProducts(r.data);
       })
-      .catch((e) => {
-        console.log("Error: ", e);
-      });
+      .catch(() => setProducts(null));
+  };
+
+  const getProductByCategory = async () => {
+    await INV_API.get(`/product/category?category=${category}`)
+      .then((r) => {
+        setProducts(r.data);
+      })
+      .catch(() => setProducts(null));
   };
 
   return products ? (
     /* There is a product */
-    <div
-      className="font-mono 
-                 px-20 py-24"
-    >
+    <div className="font-mono | px-20 py-24">
       {/* Path */}
-      <h1
-        className="font-bold text-7xl
-                   mb-20"
-      >
-        {product_path?.toUpperCase()}
-      </h1>
+      <h1 className="font-bold text-7xl | mb-20">{category?.toUpperCase()}</h1>
 
       {/* Filter */}
       <div className="flex justify-between items-center | cursor-pointer | mb-16">

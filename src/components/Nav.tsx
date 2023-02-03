@@ -71,7 +71,7 @@ const Nav = () => {
 
           {/* Shop dropdown */}
           {shopDropdown ? (
-            <div>
+            <div className="">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
@@ -84,7 +84,7 @@ const Nav = () => {
                   clip-rule="evenodd"
                 />
               </svg>
-              <ul className="absolute flex items-center px-32 py-4 w-full -translate-x-96 translate-y-16 | text-black | gap-5 | shadow-xl">
+              <ul className="absolute flex items-center | bg-white | px-32 py-4 w-full -translate-x-96 translate-y-16 | text-black | gap-5 | shadow-xl">
                 <Link
                   className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500"
                   to="/shop/all"
@@ -93,19 +93,19 @@ const Nav = () => {
                 </Link>
                 <Link
                   className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500"
-                  to="/shop/top"
+                  to="/shop/tops"
                 >
                   Tops
                 </Link>
                 <Link
                   className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500"
-                  to="/shop/pant"
+                  to="/shop/pants"
                 >
                   Pants
                 </Link>
                 <Link
                   className="font-mono | ease-out transition hover:scale-110 hover:font-bold hover:text-yellow-500"
-                  to="/shop/accessory"
+                  to="/shop/accessories"
                 >
                   Accessories
                 </Link>
