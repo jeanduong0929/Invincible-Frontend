@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Product from "../models/Product";
 import INV_API from "../utils/AxiosConfig";
-import Loading from "./Loading";
+import Loading from "./LoadingPage";
 
-const ProductList = () => {
+const ProductListPage = () => {
   const { category } = useParams();
+  const navigate = useNavigate();
   const [products, setProducts] = useState<Product[] | null>(null);
 
   useEffect(() => {
@@ -103,12 +104,11 @@ const ProductList = () => {
       {/* Card */}
       <div className="grid grid-cols-3 | cursor-pointer | gap-16">
         {products.map((p) => (
-          <ul className="flex flex-col | font-mono | ease-out duration-300 hover:scale-110 | gap-5 w-80">
-            <img
-              className=""
-              src={require(`../assets/imgs/${p.product}.png`)}
-              alt=""
-            />
+          <ul
+            className="flex flex-col | font-mono | ease-out duration-300 hover:scale-110 | gap-5 w-80"
+            onClick={() => navigate(`/product/${p.id}`)}
+          >
+            <img src={require(`../assets/imgs/${p.product}.png`)} alt="" />
             <li className="font-bold text-xl">{p.product}</li>
             <li>${p.price}.00 USD</li>
           </ul>
@@ -120,4 +120,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProductListPage;

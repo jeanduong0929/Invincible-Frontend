@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import Auth from "../models/Auth";
 import INV_API from "../utils/AxiosConfig";
 import { SetAuthContext } from "../contexts/AuthProvider";
+import "./loginpage.css";
 
-const Login = () => {
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const setAuth = useContext(SetAuthContext);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const setAuth = useContext(SetAuthContext);
-  const navigate = useNavigate();
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -62,7 +63,7 @@ const Login = () => {
     /* Main */
     <div className="flex flex-col items-center | mt-40 mb-40">
       <form
-        className="flex flex-col items-center | gap-10 p-10 | shadow-xl rounded-md"
+        className="flex flex-col items-center | bg-white | gap-10 p-10 | shadow-xl rounded-md"
         onSubmit={(e) => submit(e)}
       >
         <h1 className="font-bold font-mono  text-4xl">LOGIN</h1>
@@ -99,4 +100,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

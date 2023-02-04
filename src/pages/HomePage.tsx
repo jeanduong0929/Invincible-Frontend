@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import "./home.css";
+import "./homepage.css";
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div className="flex flex-col items-center | gap-10">
       <img
@@ -21,4 +21,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

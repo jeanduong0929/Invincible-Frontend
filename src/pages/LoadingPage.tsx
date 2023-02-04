@@ -1,4 +1,4 @@
-const Loading = () => {
+const LoadingPage = () => {
   return (
     <div
       className="flex flex-col items-center 
@@ -10,4 +10,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default LoadingPage;

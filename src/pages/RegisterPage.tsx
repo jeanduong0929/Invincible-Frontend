@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { SetAuthContext } from "../contexts/AuthProvider";
 import INV_API from "../utils/AxiosConfig";
 
-const Register = () => {
+const RegisterPage = () => {
   const navigate = useNavigate();
   const setAuth = useContext(SetAuthContext);
   const [username, setUsername] = useState<string>("");
@@ -191,4 +191,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;

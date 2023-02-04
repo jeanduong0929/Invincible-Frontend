@@ -1,18 +1,22 @@
 import { Routes, Route } from "react-router-dom";
+import ErrorPage from "../../pages/ErrorPage";
+import HomePage from "../../pages/HomePage";
+import LoginPage from "../../pages/LoginPage";
+import ProductListPage from "../../pages/ProductListPage";
+import ProductPage from "../../pages/ProductPage";
+import RegisterPage from "../../pages/RegisterPage";
 import Layout from "./Layout";
-import Home from "../../pages/Home";
-import Login from "../../pages/Login";
-import Register from "../../pages/Register";
-import ProductList from "../../pages/ProductList";
 
 const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/shop/:category" element={<ProductList />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/shop/:category" element={<ProductListPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/*" element={<ErrorPage />} />
       </Route>
     </Routes>
   );
