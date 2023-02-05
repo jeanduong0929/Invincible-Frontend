@@ -2,8 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import ErrorPage from "../../pages/ErrorPage";
 import HomePage from "../../pages/HomePage";
 import LoginPage from "../../pages/LoginPage";
-import ProductListPage from "../../pages/ProductListPage";
-import ProductPage from "../../pages/ProductPage";
+import ProductListPage from "../../pages/product/ProductListPage";
+import ProductPage from "../../pages/product/ProductPage";
 import RegisterPage from "../../pages/RegisterPage";
 import Layout from "./Layout";
 

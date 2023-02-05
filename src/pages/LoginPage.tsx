@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Auth from "../models/Auth";
 import INV_API from "../utils/AxiosConfig";
 import { SetAuthContext } from "../contexts/AuthProvider";
-import "./loginpage.css";
+import "./css/loginpage.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();

@@ -1,12 +1,11 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import SelectComponent, { Option } from "../components/SelectComponent";
-import { AuthContext } from "../contexts/AuthProvider";
-import Product from "../models/Product";
-import Size from "../models/Size";
-import INV_API from "../utils/AxiosConfig";
-import LoadingPage from "./LoadingPage";
+import SelectComponent, { Option } from "../../components/SelectComponent";
+import { AuthContext } from "../../contexts/AuthProvider";
+import Product from "../../models/Product";
+import INV_API from "../../utils/AxiosConfig";
+import LoadingPage from "../LoadingPage";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -62,7 +61,7 @@ const ProductPage = () => {
       className="flex font-mono p-16 gap-10"
       onSubmit={(e: FormEvent) => addToCart(e)}
     >
-      <img src={require(`../assets/imgs/${product.product}.png`)} alt="" />
+      <img src={require(`../../assets/imgs/${product.product}.png`)} alt="" />
       <div className="flex flex-col gap-10">
         <h1 className="font-bold text-3xl">{product.product}</h1>
         <h2 className="text-3xl">${product.price}.00</h2>
