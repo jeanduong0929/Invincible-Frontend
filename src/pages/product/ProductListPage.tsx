@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Option } from "../../components/SelectComponent";
 import Product from "../../models/Product";
 import INV_API from "../../utils/AxiosConfig";
 import Loading from "../LoadingPage";
@@ -8,26 +7,40 @@ import ProductCard from "./ProductCard";
 
 const ProductListPage = () => {
   const { category } = useParams();
+  const sizeDropdownRef = useRef<any>();
   const [products, setProducts] = useState<Product[] | null>(null);
+  const [filterSize, setFilterSize] = useState<string[]>([]);
   const [sizeDropdown, setSizeDropdown] = useState<boolean>(false);
   const sizes = [
-    { value: "S" },
-    { value: "M" },
-    { value: "L" },
-    { value: "XL" },
+    { value: "S", label: "S" },
+    { value: "M", label: "M" },
+    { value: "L", label: "L" },
+    { value: "XL", label: "XL" },
   ];
 
   useEffect(() => {
     if (category === "all") {
       getAllProducts();
     } else {
-      console.log(category);
       getProductByCategory();
     }
   }, [category]);
 
+  useEffect(() => {
+    let handler = (e: Event) => {
+      if (!sizeDropdownRef.current.contains(e.target)) {
+        setSizeDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   const getAllProducts = async () => {
-    await INV_API.get("/product")
+    await INV_API.get("/product/all")
       .then((r) => {
         setProducts(r.data);
       })
@@ -42,6 +55,16 @@ const ProductListPage = () => {
       .catch(() => setProducts(null));
   };
 
+  const handleFilterSize = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const indexOf = filterSize.indexOf(e.target.value);
+    if (indexOf !== -1) {
+      filterSize.splice(indexOf, 1);
+    } else {
+      filterSize.push(e.target.value);
+    }
+    console.log("Filter size: ", filterSize);
+  };
+
   return products ? (
     /* There is a product */
     <div className="font-mono | px-20 py-24">
@@ -54,6 +77,7 @@ const ProductListPage = () => {
           <li>Filter:</li>
 
           <div
+            ref={sizeDropdownRef}
             className="flex items-center | gap-2"
             onClick={() => setSizeDropdown(!sizeDropdown)}
           >
@@ -73,11 +97,19 @@ const ProductListPage = () => {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <ul className="absolute | flex flex-col items-start | bg-slate-200 | translate-y-8 | px-5 py-2 w-32 | rounded-md shadow-xl">
+                <ul
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute | flex flex-col items-start | bg-slate-200 | translate-y-8 | px-5 py-2 w-32 | rounded-md shadow-xl"
+                >
                   {sizes.map((s) => (
-                    <li className="w-28 | ease-in-out transition hover:font-bold">
-                      {s.value}
-                    </li>
+                    <div className="flex items-baseline | gap-5">
+                      <input
+                        type="checkbox"
+                        onChange={handleFilterSize}
+                        value={s.value}
+                      />
+                      <label>{s.label}</label>
+                    </div>
                   ))}
                 </ul>
               </div>

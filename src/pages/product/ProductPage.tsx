@@ -39,8 +39,6 @@ const ProductPage = () => {
     if (!auth) {
       ErrorToaster("Please sign in to add to cart");
     }
-
-    console.log("Size: ", size);
   };
 
   const ErrorToaster = (msg: string) => {
