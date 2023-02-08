@@ -4,6 +4,7 @@ import Product from "../../models/Product";
 import INV_API from "../../utils/AxiosConfig";
 import Loading from "../LoadingPage";
 import ProductCard from "./ProductCard";
+import "../css/productlistpage.css";
 
 const ProductListPage = () => {
   const { category } = useParams();
@@ -18,6 +19,7 @@ const ProductListPage = () => {
     { value: "XL", label: "XL" },
   ];
 
+  // Load products
   useEffect(() => {
     if (category === "all") {
       getAllProducts();
@@ -26,6 +28,7 @@ const ProductListPage = () => {
     }
   }, [category]);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
     let handler = (e: Event) => {
       if (!sizeDropdownRef.current.contains(e.target)) {
@@ -39,6 +42,7 @@ const ProductListPage = () => {
     };
   });
 
+  // Get all products
   const getAllProducts = async () => {
     await INV_API.get("/product/all")
       .then((r) => {
@@ -47,6 +51,7 @@ const ProductListPage = () => {
       .catch(() => setProducts(null));
   };
 
+  // Get product by category
   const getProductByCategory = async () => {
     await INV_API.get(`/product/category?category=${category}`)
       .then((r) => {
@@ -55,14 +60,19 @@ const ProductListPage = () => {
       .catch(() => setProducts(null));
   };
 
-  const handleFilterSize = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const indexOf = filterSize.indexOf(e.target.value);
-    if (indexOf !== -1) {
-      filterSize.splice(indexOf, 1);
+  // Check the boxes after closing the dropdown
+  const handleCheckBox = (value: string): boolean => {
+    return filterSize.indexOf(value) !== -1;
+  };
+
+  // Set the filter sizes
+  const handleFilterSize = (value: string): void => {
+    const indexOf = filterSize.indexOf(value);
+    if (indexOf === -1) {
+      setFilterSize((prev) => [...prev, value]);
     } else {
-      filterSize.push(e.target.value);
+      setFilterSize(filterSize.filter((s) => s !== value));
     }
-    console.log("Filter size: ", filterSize);
   };
 
   return products ? (
@@ -76,6 +86,7 @@ const ProductListPage = () => {
         <ul className="flex items-center | gap-5">
           <li>Filter:</li>
 
+          {/* Size dropdown */}
           <div
             ref={sizeDropdownRef}
             className="flex items-center | gap-2"
@@ -85,6 +96,7 @@ const ProductListPage = () => {
             {/* sizeDropdown true */}
             {sizeDropdown ? (
               <div className="flex flex-col items-end">
+                {/* chevron up */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -97,24 +109,31 @@ const ProductListPage = () => {
                     clip-rule="evenodd"
                   />
                 </svg>
+                {/* sizeDropdown options */}
                 <ul
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute | flex flex-col items-start | bg-slate-200 | translate-y-8 | px-5 py-2 w-32 | rounded-md shadow-xl"
+                  className="absolute | flex flex-col items-start | bg-slate-200 | translate-y-8 px-5 py-2 w-32 | rounded-md shadow-xl"
                 >
                   {sizes.map((s) => (
-                    <div className="flex items-baseline | gap-5">
+                    <div
+                      onClick={() => handleFilterSize(s.value)}
+                      className="flex items-center | gap-3 px-3 w-28 -translate-x-4 | group ease-out transition duration-300 hover:scale-110"
+                    >
                       <input
+                        id="filter-size"
                         type="checkbox"
-                        onChange={handleFilterSize}
+                        checked={handleCheckBox(s.value)}
                         value={s.value}
+                        style={{}}
                       />
-                      <label>{s.label}</label>
+                      <label className="group-hover:font-bold">{s.label}</label>
                     </div>
                   ))}
                 </ul>
               </div>
             ) : (
               /* sizeDropdown false */
+              /* chevron down */
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
